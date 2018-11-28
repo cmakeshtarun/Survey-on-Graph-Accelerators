@@ -403,7 +403,7 @@ Email: mzc88@psu.edu}}
 
 
 
-
+  
 % For peer review papers, you can put extra information on the cover
 % page as needed:
 % \ifCLASSOPTIONpeerreview
@@ -415,74 +415,17 @@ Email: mzc88@psu.edu}}
 \IEEEpeerreviewmaketitle
 
 
+\input{Introduction}
 
-\section{Introduction}
-% no \IEEEPARstart
-Graph algorithms are an interesting class of application for which a single mac mini desktop equipped with SSD outperforms a medium sized cluster! \cite{GraphChi} The primary reason for such a counter-intuitive behavior can be attributed to the irregular data-access pattern inherent in those algorithms. They also have a low computation to communication ratio which is exacerbated in the modern memory-bandwidth limited systems. However, graph algorithms are highly iterative and there is abundance of parallelism that can be exploited. These idiosyncrasies of graph algorithm render commercial HPC systems inefficient or unsuitable for accelerating such applications. Extensive research on graph processing in the past decade have revealed new insights on the algorithmic, programming model and hardware aspects of such systems. I have tried to comprehend the relevant and significant contributions of previous work in the following section.
+\input{GraphProcessing}
 
-\section{Technology related to Graph Analytics}
+\input{MemoryProcessing}
 
-Bring out the importance of Graph processing from \cite{BrainGraph,RoadGraph, SocialGraph} and discuss state-of-the-art systems. Take the example of SSSP application and discuss how the Implementation changes with various models.
+\input{Accelerators}
 
+\input{DesignSpace}
 
-  \subsection{Programming model}
-    Discuss the Vertex-based \cite{Pregel} and Gather-Apply-Scatter\cite{PowerGraph} based programming models here. Highlight the differences and bring out the suitability of each of them for PIM operations. Also show the pseudo code for SSSP application.
-
-  \subsection{Execution Model}
-    Two different paradigms: Synchronous vs Asynchronous\cite{Tesseract}, Ordered vs Unordered\cite{OvsUO}
-
-\section{Near Memory Processing Technology}
-
-  \subsection{Near-Data Processing}
-  Discuss \cite{Biscuit} like architectures where the computations are moved closer to the memory elements but not inside them.
-  End the section by indicating that more bandwidth can be exploited when the processing is integrated with memory.
-  
-  \subsection{In-memory Processing}
-      
-    \subsubsection{DRAM-PIM}
-      Present a basic idea of the \cite{AMC} paper which proposes a architecture for processing-in-memory architecture built on commercially demonstrated Hybrid Memory Cube. Also highlight the loopholes/assumptions with such design. Also list other architectures, like GraphH\cite{GraphH}, which builds on the technology.
-
-    \subsubsection{NVM-PIM}
-      Briefly list the problems with DRAM in terms of energy and performance, and bring out NVMs as an alternative to DRAM.
-      \cite{MagicNOR} introduces a efficient NOR operation which can be performed on the bitlines of ReRAM based memory. Show example architecture of NVM PIN and explain it working with relevant figures.
-    
-\section{Related Work}
-An Ideal graph processing system is where the performance increases proportional to the size of the graphs that can be stored in the system. Unfortunately, in conventional systems, memory bandwidth remains almost constant irrespective of the memory capacity due to pin count limitation per chip. Traditional caching mechanisms fail to sustain the memory throughput requirement due to the application's poor locality. 
-
-Following is the summary of various PIM-based techniques developed to mitigate the performance bottleneck in graph processing systems. \par
-
- \subsection{Graphicionado} \cite{Graphicionado} replaces the conventional on-chip memory hierarchy (caches) with explicitly managed ScratchPad memory. The accelerator achieves upto 6x speedup while consuming less than 2\% of energy of conventional systems. However, larger graph applications that doesn't fit in the on-chip memory will incur off-chip communication which is detrimental to the performance.
-
- \subsection{Tesseract} \cite{Tesseract} exploits the internal bandwidth of the HMC-RAM, which is an order of magnitude higher than the off-chip bandwidth, by integrating a logic layer within the memory die. The accelerator out performs conventional systems by a factor of 10 and achieves memory-capacity-proportional bandwidth to provide scalable performance improvements.
-
- \subsection{GraphR} \cite{GraphR} is a RRAM based in-memory graph processing accelerator. They perform analog computations using RRAM crossbar structure and achieve a speedup of 4x and energy efficiency of 11x compared to Tesseract. They exploit the fact that the graph algorithms can inherently tolerate imprecision and are resilient to errors.
- 
- \subsection{GraphP} \cite{GraphP} takes a data-organisation centric hardware-software design approach to minimise communication in a PIM based accelerator, to achieve a speedup of up to 1.7x and energy efficiency on of 89\% compared to Tesseract.
- 
- \subsection{GraphH} \cite{GraphH} GraphH takes a fresh looks at the graph analytics systems and proposes a DRAM-PIM based architecture to tackle challenges in graph processing. The proposed architecture outperforms Graphicionado by a factor of 5.12x.
-
-All these systems have customised their programming and execution model to derive maximum performance from their hardware.
-
-\section{Design Space} \label{DesignSpace}
-A brief study of the architectures listed above reveal the following parameters in the design space of an accelerator for graph analytics. 
-
-\begin{description}
- \item{$\bullet$ Core complexity} - In-Order, Out-of-Order, Superscalar
- \item{$\bullet$ Memory type} - DRAM, HMC, RRAM, Other NVMs
- \item{$\bullet$ Algorithms} - Vertex-based \cite{Pregel} vs Gather-Apply-Scatter\cite{PowerGraph}, Ordered vs Unordered\cite{OvsUO}
- \item{$\bullet$ Power} - Power Throttling in PIM based accelerators\cite{PM3}
- \item{$\bullet$ Others} - Data-Organisation\cite{GraphP}, Accuracy\cite{GraphR}, Synchronous vs Asynchronous Execution\cite{Tesseract}
-\end{description}
-
-\section{Proposed Architecture}
-
-\section{Experimental Evaluation}
-
-\section{Completed and Future Work}
-
-The architectures listed above were proposed in the last three years, with the advent of new memory technologies which made in-memory processing feasible. An in-depth study of the hardware and software stack of these PIM-based accelerators and their design choices, may expose untapped design points to improve performance. The plan was to begin by understanding various design points listed in Section \ref{DesignSpace}, evaluate the accelerators for strengths and limitations, and identify potential improvements in their design, leading to a survey paper or an original research paper.
-
-I have read papers GraphR\cite{GraphR}, GraphP\cite{GraphP} and other papers based on NVM-PIM \cite{k-means}. Apart from that I also ramped up with Pregel and ZSim Simulation framework. The next step would be to prototype one of the architectures (possibly GraphR or GraphH) and identify bottlenecks to improve the perforamance. A survey paper on this topic makes little sense as the in-memory processing of graphs is a relatively narrow and emerging field. Moreover, there are recent resources \cite{BGA-book, SG-MT} that contain an exhaustive analysis of the topic.
+\input{FutureWork}
 
 % An example of a floating figure using the graphicx package.
 % Note that \label must occur AFTER (or within) \caption.
@@ -674,10 +617,6 @@ Merritt ID: ark:/13030/m5bg7kwn. Retrieved from https://escholarship.org/uc/item
 
 \end{thebibliography}
 
-
-
-
-% that's all folks
 \end{document}
 
 

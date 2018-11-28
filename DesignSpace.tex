@@ -1,0 +1,10 @@
+\section{Design Space} \label{DesignSpace}
+A brief study of the architectures listed above reveal the following parameters in the design space of an accelerator for graph analytics. 
+
+\begin{description}
+ \item{$\bullet$ Core complexity} - In-Order, Out-of-Order, Superscalar
+ \item{$\bullet$ Memory type} - DRAM, HMC, RRAM, Other NVMs
+ \item{$\bullet$ Algorithms} - Vertex-based \cite{Pregel} vs Gather-Apply-Scatter\cite{PowerGraph}, Ordered vs Unordered\cite{OvsUO}
+ \item{$\bullet$ Power} - Power Throttling in PIM based accelerators\cite{PM3}
+ \item{$\bullet$ Others} - Data-Organisation\cite{GraphP}, Accuracy\cite{GraphR}, Synchronous vs Asynchronous Execution\cite{Tesseract}
+\end{description}

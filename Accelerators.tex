@@ -1,0 +1,16 @@
+\section{Accelerators}
+An Ideal graph processing system is where the performance increases proportional to the size of the graphs that can be stored in the system. Unfortunately, in conventional systems, memory bandwidth remains almost constant irrespective of the memory capacity due to pin count limitation per chip. Traditional caching mechanisms fail to sustain the memory throughput requirement due to the application's poor locality. 
+
+Following is the summary of various PIM-based techniques developed to mitigate the performance bottleneck in graph processing systems. \par
+
+ \subsection{Graphicionado} \cite{Graphicionado} replaces the conventional on-chip memory hierarchy (caches) with explicitly managed ScratchPad memory. The accelerator achieves upto 6x speedup while consuming less than 2\% of energy of conventional systems. However, larger graph applications that doesn't fit in the on-chip memory will incur off-chip communication which is detrimental to the performance.
+
+ \subsection{Tesseract} \cite{Tesseract} exploits the internal bandwidth of the HMC-RAM, which is an order of magnitude higher than the off-chip bandwidth, by integrating a logic layer within the memory die. The accelerator out performs conventional systems by a factor of 10 and achieves memory-capacity-proportional bandwidth to provide scalable performance improvements.
+
+ \subsection{GraphR} \cite{GraphR} is a RRAM based in-memory graph processing accelerator. They perform analog computations using RRAM crossbar structure and achieve a speedup of 4x and energy efficiency of 11x compared to Tesseract. They exploit the fact that the graph algorithms can inherently tolerate imprecision and are resilient to errors.
+ 
+ \subsection{GraphP} \cite{GraphP} takes a data-organisation centric hardware-software design approach to minimise communication in a PIM based accelerator, to achieve a speedup of up to 1.7x and energy efficiency on of 89\% compared to Tesseract.
+ 
+ \subsection{GraphH} \cite{GraphH} GraphH takes a fresh looks at the graph analytics systems and proposes a DRAM-PIM based architecture to tackle challenges in graph processing. The proposed architecture outperforms Graphicionado by a factor of 5.12x.
+
+All these systems have customised their programming and execution model to derive maximum performance from their hardware.
