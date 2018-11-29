@@ -49,8 +49,8 @@
 % The testflow support page is at:
 % http://www.michaelshell.org/tex/testflow/
 
-\documentclass[journal,onecolumn]{IEEEtran}
-%\documentclass[conference,compsoc]{IEEEtran}
+%\documentclass[journal,onecolumn]{IEEEtran}
+\documentclass[conference,compsoc]{IEEEtran}
 
 % Some/most Computer Society conferences require the compsoc mode option,
 % but others may want the standard conference format.
@@ -191,7 +191,10 @@
 
 % *** SPECIALIZED LIST PACKAGES ***
 %
-%\usepackage{algorithmic}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage[noend]{algpseudocode}
 % algorithmic.sty was written by Peter Williams and Rogerio Brito.
 % This package provides an algorithmic environment fo describing algorithms.
 % You can use the algorithmic environment in-text or within a figure
@@ -334,7 +337,7 @@
 % not capitalized unless they are the first or last word of the title.
 % Linebreaks \\ can be used within to get better formatting as desired.
 % Do not put math or special symbols in the title.
-\title{PIM-based Accelerators for Graph Analytics}
+\title{A Survey on Near Data Processing Accelerators for Graph Analytics}
 
 
 % author names and affiliations
@@ -414,7 +417,6 @@ Email: mzc88@psu.edu}}
 % creates the second title. It will be ignored for other modes.
 \IEEEpeerreviewmaketitle
 
-
 \input{Introduction}
 
 \input{GraphProcessing}
@@ -422,8 +424,6 @@ Email: mzc88@psu.edu}}
 \input{MemoryProcessing}
 
 \input{Accelerators}
-
-\input{DesignSpace}
 
 \input{FutureWork}
 
@@ -614,6 +614,8 @@ doi: 10.1109/TCAD.2018.2821565
 
 \bibitem{SG-MT} Gupta, S. (2018). Processing in Memory using Emerging Memory Technologies. UC San Diego. ProQuest ID: 
 Merritt ID: ark:/13030/m5bg7kwn. Retrieved from https://escholarship.org/uc/item/95z3z84c
+
+\bibitem{graphFwSurvey} Omar Batarfi, Radwa El Shawi, Ayman G. Fayoumi, Reza Nouri, Seyed-Mehdi-Reza Beheshti, Ahmed Barnawi, and Sherif Sakr. 2015. Large scale graph processing systems: survey and an experimental evaluation. Cluster Computing 18, 3
 
 \end{thebibliography}
 

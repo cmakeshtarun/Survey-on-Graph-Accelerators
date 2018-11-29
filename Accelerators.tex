@@ -3,6 +3,20 @@ An Ideal graph processing system is where the performance increases proportional
 
 Following is the summary of various PIM-based techniques developed to mitigate the performance bottleneck in graph processing systems. \par
 
+
+\begin{table*}[t]
+\centering
+\begin{tabular}{|p{0.13\linewidth}|p{0.14\linewidth}|p{0.14\linewidth}|p{0.14\linewidth}|p{0.14\linewidth}|p{0.14\linewidth}|}
+\hline
+& Graphicianado                    & GraphH                            & Tesseract                     & GraphR                    & GraphP                        \\ \hline
+Programing Model & Vertex-centric                   & Gather-Apply-Broadcast            & Vertex-centric                & Vertex-centric            & Two phase vertex              \\ \hline
+Execution Model  & Matrix computation               & Message passing and shared memory & Message passing and iterative & Sparse matrix computation & Message passing and iterative \\ \hline
+Computing Mode   & Sync                             &                                   & Sync                          &                           &                               \\ \hline
+Generality       & Vertex program                   &                                   & Vertex program                & Vertex program in SpMV    &                               \\ \hline
+Data access      & Explicitly managed in Scratchpad & In-memory processing              & DRAM-PIM                      & ReRAM-PIM                 & DRAM-PIM                      \\ \hline
+\end{tabular}
+\end{table*}
+
  \subsection{Graphicionado} \cite{Graphicionado} replaces the conventional on-chip memory hierarchy (caches) with explicitly managed ScratchPad memory. The accelerator achieves upto 6x speedup while consuming less than 2\% of energy of conventional systems. However, larger graph applications that doesn't fit in the on-chip memory will incur off-chip communication which is detrimental to the performance.
 
  \subsection{Tesseract} \cite{Tesseract} exploits the internal bandwidth of the HMC-RAM, which is an order of magnitude higher than the off-chip bandwidth, by integrating a logic layer within the memory die. The accelerator out performs conventional systems by a factor of 10 and achieves memory-capacity-proportional bandwidth to provide scalable performance improvements.
