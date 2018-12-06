@@ -1,30 +1,55 @@
 \section{Accelerators}
-An Ideal graph processing system is where the performance increases proportional to the size of the graphs that can be stored in the system. Unfortunately, in conventional systems, memory bandwidth remains almost constant irrespective of the memory capacity due to pin count limitation per chip. Traditional caching mechanisms fail to sustain the memory throughput requirement due to the application's poor locality. 
-
-Following is the summary of various PIM-based techniques developed to mitigate the performance bottleneck in graph processing systems. \par
-
+An Ideal graph processing system is where the performance increases proportional to the size of the graphs that can be stored in the system. Unfortunately, in conventional systems, memory bandwidth remains almost constant irrespective of the memory capacity due to pin count limitation per chip. Traditional caching mechanisms fail to sustain the memory throughput requirement due to the application's poor locality. Following is the summary of accelerators with unconventional memory design, developed to mitigate the performance bottleneck in graph processing systems. \par
 
 \begin{table*}[t]
+\small
 \centering
+\caption{Comparison of various features of Graph Analytics Accelerators}
 \begin{tabular}{|p{0.13\linewidth}|p{0.14\linewidth}|p{0.14\linewidth}|p{0.14\linewidth}|p{0.14\linewidth}|p{0.14\linewidth}|}
 \hline
-& Graphicianado                    & GraphH                            & Tesseract                     & GraphR                    & GraphP                        \\ \hline
-Programing Model & Vertex-centric                   & Gather-Apply-Broadcast            & Vertex-centric                & Vertex-centric            & Two phase vertex              \\ \hline
-Execution Model  & Matrix computation               & Message passing and shared memory & Message passing and iterative & Sparse matrix computation & Message passing and iterative \\ \hline
-Computing Mode   & Sync                             &                                   & Sync                          &                           &                               \\ \hline
-Generality       & Vertex program                   &                                   & Vertex program                & Vertex program in SpMV    &                               \\ \hline
-Data access      & Explicitly managed in Scratchpad & In-memory processing              & DRAM-PIM                      & ReRAM-PIM                 & DRAM-PIM                      \\ \hline
+& \textbf{Graphicianado}                 & \textbf{GraphH}      & \textbf{Tesseract}  & \textbf{GraphR}& \textbf{GraphP} \\ \hline
+
+\textbf{Programing Model} & Gather-Apply-Scatter                   & Gather-Apply-Broadcast            & Pregel-like                & Pregel-like            & Pregel like + Two phase Update              \\ \hline
+
+\textbf{Execution Model}  & Pipelined               & Message passing and shared memory & Message passing and iterative & Sparse matrix computation & Message passing and iterative \\ \hline
+
+\textbf{Computing Mode}   & Sync             &    Sync                               & Sync \& Async                         &  Sync                         & Sync \& Async        \\ \hline
+
+\textbf{Memory Organisation}      & Explicitly managed in Scratchpad & Memory-disk hybrid              & DRAM-PIM (HMC)                     & ReRAM-PIM                 & DRAM-PIM (HMC)                     \\ \hline
+
+\textbf{Core} 		& Custom pipeline processor & General purpose processor&In-order core with prefetcher  & ReRam Crossbar \& ALUs  &In-order core with prefetcher \\ \hline
+
+\textbf{Generality}       & Any Vertex program                   &    Any Vertex or Edge based program             & Any Vertex program                & Vertex program in SpMV    & Any Vertex program    \\ \hline
+
+
 \end{tabular}
 \end{table*}
 
- \subsection{Graphicionado} \cite{Graphicionado} replaces the conventional on-chip memory hierarchy (caches) with explicitly managed ScratchPad memory. The accelerator achieves upto 6x speedup while consuming less than 2\% of energy of conventional systems. However, larger graph applications that doesn't fit in the on-chip memory will incur off-chip communication which is detrimental to the performance.
-
- \subsection{Tesseract} \cite{Tesseract} exploits the internal bandwidth of the HMC-RAM, which is an order of magnitude higher than the off-chip bandwidth, by integrating a logic layer within the memory die. The accelerator out performs conventional systems by a factor of 10 and achieves memory-capacity-proportional bandwidth to provide scalable performance improvements.
-
- \subsection{GraphR} \cite{GraphR} is a RRAM based in-memory graph processing accelerator. They perform analog computations using RRAM crossbar structure and achieve a speedup of 4x and energy efficiency of 11x compared to Tesseract. They exploit the fact that the graph algorithms can inherently tolerate imprecision and are resilient to errors.
+ \subsection{Graphicionado}
+ Graphicionado \cite{Graphicionado} is a custom hardware accelerator based on the Gather-Apply-Scatter model. The execution in each of the phases are broken down into pipeline stages and custom hardware units are deployed to perform the operations. There are about 10 stages in the Processing phase and 6 stages in the Update phase. A vertex can only be in one of the stage making the system inherently atomic. The memory subsystem is also redesigned to suit graph processing. Scratchpad memory is used to buffer the temporary updates to the vertices, and an edge Id table which stores the first edge of each vertex, eliminating most of the random accesses to the memory. Other optimizations such as streamed data access, and prefetching are also supported. 
  
- \subsection{GraphP} \cite{GraphP} takes a data-organisation centric hardware-software design approach to minimise communication in a PIM based accelerator, to achieve a speedup of up to 1.7x and energy efficiency on of 89\% compared to Tesseract.
+ To scale the processing unit, the pipeline stages are split into source-oriented and destination-oriented stages and the multiple instance of each them are inter-connected through a crossbar. The parallelization of source and destination streams eliminates memory access conflicts as each of the streams access regions exclusively assigned to it. To achieve this, graph slicing techniques are used to create partitions of graphs which have minimum interaction with each other. This trivializes the scaling of the scratchpad memory system to simply creating m instances of scratchpad units for m source-and-destination streams. The accelerator achieves upto 6x speedup while consuming less than 2\% of energy of compared to the state-of-the-art software graphs analytics framework running on a 16-core Haswell Xeon server. However, for large graphs it is not feasible to hold all the relevant metadata in scratchpad and data movement across the hierarchy degrades the system performance for such large inputs.
  
- \subsection{GraphH} \cite{GraphH} GraphH takes a fresh looks at the graph analytics systems and proposes a DRAM-PIM based architecture to tackle challenges in graph processing. The proposed architecture outperforms Graphicionado by a factor of 5.12x.
+ \subsection{GraphH} GraphH \cite{GraphH} is a high performance distributed big graph analytics framework optimized for a small number of clusters. It is built on a spark-based graph processing engine, a distributed file-system and MPI based graph processing engine. The underlying principle is to implement a memory-disk hybrid approach which reduces the data movement overhead by maximising the reuse of in-memory data. In this regard, three techniques are employed:
+ \begin{enumerate}
+  \item The graph is evenly split into tiles and distributed to servers for performing computation while the whole graph is replicated in all the systems
+  \item Gather-Apply-Broadcast(GAB) is used to represent the distribution of tiles across the server. 
+  \item Edge Cache system -lines are evicted only when cache is full - is employed to utilise the idle memory to reduce disk IO overhead.
+ \end{enumerate}
 
-All these systems have customised their programming and execution model to derive maximum performance from their hardware.
+ The difference between GAB and GAS is that GAB maintains replicas of data in every server, which have to be updated by a 'Broadcast' after every 'Apply' step. Various graph partitioning mechanisms such as Hash-based Edge-cut, Intelligent Vertex-cut and Stream partitioning are also analysed for communication and computation overheads on small clusters. Performance evaluation shows that GraphH can be 7.8X faster than the in-memory systems such as Pregel+ and Powergraph while processing generic graphs, and 100X faster than the out-of-core systems such as GraphD and Chaos.
+
+ 
+ \subsection{Tesseract} The Tesseract architecture \cite{Tesseract} exploits the internal bandwidth of the HMC-RAM, which is an order of magnitude higher than the off-chip bandwidth, by integrating a logic layer within the memory die. The HMC in Tesseract is organised as vaults which are vertical slices of memory in a cube. Each vault is composed of a 16-bank DRAM partition and a dedicated memory controller. The logic layer of a vault is equipped with a single issue in-order core. Each cube can host upto 32 vaults and 8 high-speed serial links as off-chip interface. The Tesseract cores (cubes) are integrated with the host as a memory-mapped co-processor device.
+ 
+ The host distributes jobs between the cores based on the location of data relevant to the job. During execution data access to the remote cubes are facilitated through a low cost message passing mechanism. The communication mechanism is inherently atomic and its latency can be hidden through asynchronous communication. The remote access latency can also be overcome by employing a data prefetcher which derives heuristics from the program and execution trace. The programming interface consists of a set of APIs capturing basic functions in the underlying hardware, on which any commercial graph analytics framework can be built. The proposed system was evaluated on five state-of-the-art graph processing applications and achieve a speedup of over 14x compared to the standard DDR3 based systems. Tesseract also achieves memory-capacity proportional performance, which is the key to handling increasing amounts of data in a cost-effective manner. However, when scaling the system with multiple Tesseract cores, the off-chip communication latency incurred while accessing data in a remote core becomes the performance bottleneck.
+ 
+ \subsection{GraphR} GraphR \cite{GraphR} leverages on the fact that graph computations are inherently tolerant to imprecision and resilient to errors, to perform approximate computations on the graph, using ReRAM crossbar discussed in section \ref{gmat}. The GraphR architecture contains two key components : memory ReRAM and graph engine. The graph is stored in memresistor-based RAM (called ReRAM) in compressed sparse representation of its adjacency matrix. The graph engine is equipped with ReRAM crossbars, Analog to Digital converters, a simple ALU and IO registers to cache IO values. The schemes for mapping two prominent operations - parallel-MAC and parallel-ADD  are described in the paper. To facilitate the data movement between GE and memory, streaming-apply mechanism is employed. Graphs are stored in coloumn major order, and vertices in a coloumn are streamed onto GEs to be processed together. GraphR can be plugged in as an accelerator to a host processor which assigns a subgraph of a large graph for processing. The experiment results show that GraphR achieves 16X speedup and a 33X energy saving on geometric mean compared to a CPU baseline system. Compared to GPU, GraphR achieves 1.69X to 2.19X speedup and consumes 4.7X to 8.9X less energy. GraphR gains a speedup of upto 4X, and is 10X more energy efficiency compared to Tesseract \cite{Tesseract}. However, the whole idea rests on the assumption that the proposed memresistive device with its energy characteristics is practically feasible, which has not been demonstrated yet. Also, the SpMV based computation model limits the number of graph applications that can be efficiently supported by the proposed architecture.
+ 
+ \subsection{GraphP} The motivation behind GraphP \cite{GraphP} is to reduce the excessive cross-cube communication overhead through SerDes links whose bandwidth is much less than the bandwidth available within a cube. The design considers data organisation as the first-order design criteria in mitigating the bottleneck. The techniques developed for the same are -
+ \begin{enumerate}
+  \item 'Source-Cut' partitioning - Split the graph such that all the incoming edges of a vertex are contained in the same cube.
+  \item 'Two-phase vertex' programming model - \textit{GenUpdate} to generate the vertex value update on all incoming edges \& \textit{ApplyUpdate} to apply the update to each vertex. The two phases can be overlapped, with each other and the execution, to further hide the latency.
+ \end{enumerate}
+  With these optimisations, the proposed architecture is able to to achieve a speedup of up to 1.7x and energy efficiency of 89\% compared to Tesseract. This is at the expense of programmability of the hardware, due to the introduction of Two-phase vertex programming. Also Source-Cut partitioning may not be feasible for power law like vertex degree distribution where some vertices have large number of edges which may not fit inside a cube.
+ 

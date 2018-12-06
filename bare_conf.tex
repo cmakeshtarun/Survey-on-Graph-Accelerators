@@ -324,6 +324,9 @@
 % (Unless specifically asked to do so by the journal or conference you plan
 % to submit to, of course. )
 
+\usepackage{caption}
+\captionsetup[table]{position=bottom}
+
 
 % correct bad hyphenation here
 \hyphenation{op-tical net-works semi-conduc-tor}
@@ -570,11 +573,9 @@ Email: mzc88@psu.edu}}
 
 \bibitem{GraphChi} Aapo Kyrola, Guy Blelloch, and Carlos Guestrin. 2012. GraphChi: large-scale graph computation on just a PC. In Proceedings of the 10th USENIX conference on Operating Systems Design and Implementation (OSDI'12). USENIX Association, Berkeley, CA, USA, 31-46.
 
-\bibitem{Pregel} Malewicz, Matthew H. Austern, Aart J.C Bik, James C. Dehnert, Ilan Horn, Naty Leiser, and Grzegorz Czajkowski. 2010. Pregel: a system for large-scale graph processing. In Proceedings of the 2010 ACM SIGMOD International Conference on Management of data (SIGMOD '10). ACM, New York, NY, USA, 135-146. DOI: https://doi.org/10.1145/1807167.1807184
+\bibitem{Pregel} Malewicz, Matthew H. Austern, Aart J.C Bik, James C. Dehnert, Ilan Horn, Naty Leiser, and Grzegorz Czajkowski. 2010. Pregel: a system for large-scale graph processing. In Proceedings of the 2010 ACM SIGMOD International Conference on Management of data (SIGMOD '10). ACM, New York, NY, USA, 135-146.
 
 \bibitem{PowerGraph} Joseph E. Gonzalez, Yucheng Low, Haijie Gu, Danny Bickson, and Carlos Guestrin. 2012. PowerGraph: distributed graph-parallel computation on natural graphs. In Proceedings of the 10th USENIX conference on Operating Systems Design and Implementation (OSDI'12). USENIX Association, Berkeley, CA, USA, 17-30.
-
-\bibitem{OvsUO} Amber Hassaan, Martin Burtscher, and Keshav Pingali. 2011. Ordered vs. unordered: a comparison of parallelism and work-efficiency in irregular algorithms. In Proceedings of the 16th ACM symposium on Principles and practice of parallel programming (PPoPP '11). ACM, New York, NY, USA, 3-12. DOI=http://dx.doi.org/10.1145/1941553.1941557
 
 \bibitem{Graphicionado} T. J. Ham, L. Wu, N. Sundaram, N. Satish and M. Martonosi, "Graphicionado: A high-performance and energy-efficient accelerator for graph analytics," 2016 49th Annual IEEE/ACM International Symposium on Microarchitecture (MICRO), Taipei, 2016, pp. 1-13.
 
@@ -584,31 +585,13 @@ Email: mzc88@psu.edu}}
 
 \bibitem{GraphP} M. Zhang et al., "GraphP: Reducing Communication for PIM-Based Graph Processing with Efficient Data Partition," 2018 IEEE International Symposium on High Performance Computer Architecture (HPCA), Vienna, 2018, pp. 544-557.
 
-\bibitem{GAA} Muhammet Mustafa Ozdal, Serif Yesil, Taemin Kim, Andrey Ayupov, John Greth, Steven Burns, and Ozcan Ozturk. 2016. Energy efficient architecture for graph analytics accelerators. In Proceedings of the 43rd International Symposium on Computer Architecture (ISCA '16). IEEE Press, Piscataway, NJ, USA, 166-177. DOI: https://doi.org/10.1109/ISCA.2016.24
-
-\bibitem{PM3} C. Zhang, T. Meng and G. Sun, "PM3: Power Modeling and Power Management for Processing-in-Memory," 2018 IEEE International Symposium on High Performance Computer Architecture (HPCA), Vienna, 2018, pp. 558-570.
-
-\bibitem{AMC} R. Nair et al., "Active Memory Cube: A processing-in-memory architecture for exascale systems," in IBM Journal of Research and Development, vol. 59, no. 2/3, pp. 17:1-17:14, March-May 2015.
-doi: 10.1147/JRD.2015.2409732
-
-\bibitem{MagicNOR} S. Kvatinsky et al., "MAGIC—Memristor-Aided Logic," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 61, no. 11, pp. 895-899, Nov. 2014.
-doi: 10.1109/TCSII.2014.2357292
-
-\bibitem{SocialGraph} Muhammad Imran, Carlos Castillo, Fernando Diaz, and Sarah Vieweg. 2015. Processing Social Media Messages in Mass Emergency: A Survey. ACM Comput. Surv. 47, 4, Article 67 (June 2015), 38 pages. DOI: https://doi.org/10.1145/2771588
+\bibitem{SocialGraph} Muhammad Imran, Carlos Castillo, Fernando Diaz, and Sarah Vieweg. 2015. Processing Social Media Messages in Mass Emergency: A Survey. ACM Comput. Surv. 47, 4, Article 67 (June 2015), 38 pages. 
 
 \bibitem{RoadGraph} C. Unsalan and B. Sirmacek, "Road Network Detection Using Probabilistic and Graph Theoretical Methods," in IEEE Transactions on Geoscience and Remote Sensing, vol. 50, no. 11, pp. 4441-4453, Nov. 2012.
 
-\bibitem{BrainGraph} Bullmore, Ed
- Sporns, Olaf
- Complex brain networks: graph theoretical analysis of structural and functional systems
- DOI: http://dx.doi.org/10.1038/nrn2575
-
-\bibitem{Biscuit} Boncheol Gu, Andre S. Yoon, Duck-Ho Bae, Insoon Jo, Jinyoung Lee, Jonghyun Yoon, Jeong-Uk Kang, Moonsang Kwon, Chanho Yoon, Sangyeun Cho, Jaeheon Jeong, and Duckhyun Chang. 2016. Biscuit: a framework for near-data processing of big data workloads. SIGARCH Comput. Archit. News 44, 3 (June 2016), 153-165. DOI: https://doi.org/10.1145/3007787.3001154
+\bibitem{Biscuit} Boncheol Gu, Andre S. Yoon, Duck-Ho Bae, Insoon Jo, Jinyoung Lee, Jonghyun Yoon, Jeong-Uk Kang, Moonsang Kwon, Chanho Yoon, Sangyeun Cho, Jaeheon Jeong, and Duckhyun Chang. 2016. Biscuit: a framework for near-data processing of big data workloads. SIGARCH Comput. Archit. News 44, 3 (June 2016), 153-165.
 
 \bibitem{GraphH} G. Dai et al., "GraphH: A Processing-in-Memory Architecture for Large-scale Graph Processing," in IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems.
-doi: 10.1109/TCAD.2018.2821565
-
-\bibitem{k-means} Y. K. Rupesh, P. Behnam, G. R. Pandla, M. Miryala and M. Nazm Bojnordi, "Accelerating k-Medians Clustering Using a Novel 4T-4R RRAM Cell," in IEEE Transactions on Very Large Scale Integration (VLSI) Systems. doi: 10.1109/TVLSI.2018.2808468
 
 \bibitem{BGA-book} Systems for Big Graph Analytics by Yan, Da, Tian, Yuanyuan, Cheng, James
 
@@ -616,6 +599,43 @@ doi: 10.1109/TCAD.2018.2821565
 Merritt ID: ark:/13030/m5bg7kwn. Retrieved from https://escholarship.org/uc/item/95z3z84c
 
 \bibitem{graphFwSurvey} Omar Batarfi, Radwa El Shawi, Ayman G. Fayoumi, Reza Nouri, Seyed-Mehdi-Reza Beheshti, Ahmed Barnawi, and Sherif Sakr. 2015. Large scale graph processing systems: survey and an experimental evaluation. Cluster Computing 18, 3
+
+\bibitem{hmc} J. T. Pawlowski, "Hybrid memory cube (HMC)," 2011 IEEE Hot Chips 23 Symposium (HCS), Stanford, CA, USA, 2011, pp. 1-24. 
+
+\bibitem{amc} R. Nair et al., "Active Memory Cube: A processing-in-memory architecture for exascale systems," in IBM Journal of Research and Development, vol. 59, no. 2/3, pp. 17:1-17:14, March-May 2015.
+
+\bibitem{sram_search} Q. Dong et al., "A 4 + 2T SRAM for Searching and In-Memory Computing With 0.3-V $V_{\mathrm {DDmin}}$," in IEEE Journal of Solid-State Circuits, vol. 53, no. 4, pp. 1006-1015, April 2018.
+
+\bibitem{bulkbit} V. Seshadri et al., "Fast Bulk Bitwise AND and OR in DRAM," in IEEE Computer Architecture Letters, vol. 14, no. 2, pp. 127-131, 1 July-Dec. 2015.
+
+\bibitem{drisa} Shuangchen Li, Dimin Niu, Krishna T. Malladi, Hongzhong Zheng, Bob Brennan, and Yuan Xie. 2017. DRISA: a DRAM-based Reconfigurable In-Situ Accelerator. In Proceedings of the 50th Annual IEEE/ACM International Symposium on Microarchitecture (MICRO-50 '17). ACM, New York, NY, USA, 288-301
+
+\bibitem{imi} T. Finkbeiner, G. Hush, T. Larsen, P. Lea, J. Leidel and T. Manning, "In-Memory Intelligence," in IEEE Micro, vol. 37, no. 4, pp. 30-38, 2017. doi: 10.1109/MM.2017.3211117
+
+\bibitem{prsram} M. Kang, M. Keel, N. R. Shanbhag, S. Eilert and K. Curewitz, "An energy-efficient VLSI architecture for pattern recognition via deep embedding of computation in SRAM," 2014 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), Florence, 2014, pp. 8326-8330.
+
+\bibitem{cam} S. Jeloka, N. B. Akesh, D. Sylvester and D. Blaauw, "A 28 nm Configurable Memory (TCAM/BCAM/SRAM) Using Push-Rule 6T Bit Cell Enabling Logic-in-Memory," in IEEE Journal of Solid-State Circuits, vol. 51, no. 4, pp. 1009-1021, April 2016.
+
+\bibitem{computecache} S. Aga, S. Jeloka, A. Subramaniyan, S. Narayanasamy, D. Blaauw and R. Das, "Compute Caches," 2017 IEEE International Symposium on High Performance Computer Architecture (HPCA), Austin, TX, 2017, pp. 481-492.
+
+\bibitem{sramml} J. Zhang, Z. Wang and N. Verma, "In-Memory Computation of a Machine-Learning Classifier in a Standard 6T SRAM Array," in IEEE Journal of Solid-State Circuits, vol. 52, no. 4, pp. 915-924, April 2017.
+
+\bibitem{6Tsram} Q. Dong et al., "A 4 + 2T SRAM for Searching and In-Memory Computing With 0.3-V $V_{\mathrm {DDmin}}$," in IEEE Journal of Solid-State Circuits, vol. 53, no. 4, pp. 1006-1015, April 2018.
+
+\bibitem{tcamrram} Qing Guo, Xiaochen Guo, Yuxin Bai, and Engin İpek. 2011. A resistive TCAM accelerator for data-intensive computing. In Proceedings of the 44th Annual IEEE/ACM International Symposium on Microarchitecture (MICRO-44). ACM, New York, NY, USA, 339-350.
+
+\bibitem{memres} Dmitri B Strukov, Gregory S Snider, et al. The missing memristor found. Nature, 453(7191):80–83, 2008.
+
+\bibitem{xbarcomp} B. Li, Y. Shan, M. Hu, Y. Wang, Y. Chen and H. Yang, "Memristor-based approximated computation," International Symposium on Low Power Electronics and Design (ISLPED), Beijing, 2013, pp. 242-247.
+
+\bibitem{xbrml} Yongtae Kim, Yong Zhang, and Peng Li. 2015. A Reconfigurable Digital Neuromorphic Processor with Memristive Synaptic Crossbar for Cognitive Computing. J. Emerg. Technol. Comput. Syst. 11, 4, Article 38 (April 2015), 25 pages.
+
+\bibitem{magic} S. Kvatinsky et al., "MAGIC—Memristor-Aided Logic," in IEEE Transactions on Circuits and Systems II: Express Briefs, vol. 61, no. 11, pp. 895-899, Nov. 2014.
+
+\bibitem{imply} S. Kvatinsky, G. Satat, N. Wald, E. G. Friedman, A. Kolodny and U. C. Weiser, "Memristor-Based Material Implication (IMPLY) Logic: Design Principles and Methodologies," in IEEE Transactions on Very Large Scale Integration (VLSI) Systems, vol. 22, no. 10, pp. 2054-2066, Oct. 2014.
+
+\bibitem{magic-add} N. Talati, S. Gupta, P. Mane and S. Kvatinsky, "Logic Design Within Memristive Memories Using Memristor-Aided loGIC (MAGIC)," in IEEE Transactions on Nanotechnology, vol. 15, no. 4, pp. 635-650, July 2016.
+
 
 \end{thebibliography}
 
